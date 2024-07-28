@@ -1,0 +1,1 @@
+{user: user.name + '' + user.last_name}
