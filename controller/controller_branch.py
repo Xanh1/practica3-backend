@@ -5,7 +5,12 @@ from app import DB
 
 class ControllerBranch():
 
+    def get_all(self):
 
+        branches = Branch.query.all()
+
+        return json_response('Success', 200, [branch.serialize for branch in branches])
+    
     def create(self, json):
 
         name = Branch.query.filter_by(name = json['name']).first()

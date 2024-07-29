@@ -22,6 +22,27 @@ save_user = {
     }
 }
 
+update_user = {
+    "type": "object",
+    "required": ["dni", "name", "last-name", "person"],
+    "properties": {
+        "dni": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 10
+        },
+        "name": {
+            "type": "string"
+        },
+        "last-name": {
+            "type": "string"
+        },
+        "person": {
+            "type": "string"
+        }
+    }
+}
+
 auth_user = {
     "type": "object",
     "required": ["username", "password"],

@@ -2,7 +2,7 @@ from flask import Blueprint, make_response, request, jsonify
 from flask_expects_json import expects_json
 
 from controller.controller_user import ControllerUser
-from schema.schema_user import save_user, auth_user
+from schema.schema_user import save_user, auth_user, update_user
 
 controller = ControllerUser()
 url_user = Blueprint('url_user', __name__)
@@ -16,6 +16,17 @@ def create():
     response = controller.create(json = json_request)
 
     return make_response(jsonify(response), response['code'])
+
+@url_user.route('/user/update', methods = ['POST'])
+@expects_json(update_user)
+def update():
+
+    json_request = request.json
+
+    response = controller.update(json = json_request)
+
+    return make_response(jsonify(response), response['code'])
+
 
 @url_user.route('/user/auth', methods = ['POST'])
 @expects_json(auth_user)

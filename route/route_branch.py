@@ -17,3 +17,11 @@ def create():
     response = controller.create(json = json_request)
 
     return make_response(jsonify(response), response['code'])
+
+
+@url_branch.route('/branch/all', methods = ['GET'])
+def get_all():
+
+    response = controller.get_all()
+
+    return make_response(jsonify(response), response['code'])

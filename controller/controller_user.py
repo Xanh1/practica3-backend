@@ -30,9 +30,12 @@ class ControllerUser():
     def auth(self, json):
 
         user = Account.query.filter_by(username = json['username']).first()
+        
+        if not user:
+            return json_response('Error', 404, Error.NON_EXISTS_ACCOUNT.value)
 
         if user.password != json['password']:
-            return json_response('Error', 401, Error.NON_EXISTS_ACCOUNT.value)
+            return json_response('Error', 404, Error.NON_EXISTS_ACCOUNT.value)
         
         token = create_token(user.uid, 20)
 
@@ -43,6 +46,22 @@ class ControllerUser():
         }
 
         return json_response('Success', 200, context)
+    
+    def update(self, json):
+        
+        person = Person.query.filter_by(uid = json['person']).first()
+
+        if not person:
+            return json_response('Error', 404, Error.NON_EXIST_PERSON.value)
+        
+        person.dni = json['dni']
+        person.name = json['name']
+        person.last_name = json['last-name']
+
+        DB.session.commit()
+
+        return json_response('Success', 200, 'Profile updated')
+    
     
     def get_user_by_uid(self, uid):
 
