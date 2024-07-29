@@ -101,5 +101,5 @@ class ControllerProduct():
                 return json_response('Success', 200, 'Exist expired products')
         
         
-        return json_response('Success', 200, 'Non exist expired products')
+        return json_response('Success', 200, 'has not expired products')
     
